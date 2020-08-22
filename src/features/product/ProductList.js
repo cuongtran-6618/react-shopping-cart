@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Product from "./Product";
 
 export const ProductList = () => {
-	const products = useSelector((state) => state.products);
+	const products = useSelector((state) => state.rootReducer.products);
 
 	return (
 		<div>
