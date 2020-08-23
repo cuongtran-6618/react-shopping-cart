@@ -6,18 +6,30 @@ const cartSlice = createSlice({
 	reducers: {
 		updateProduct: {
 			prepare: (product, quantity) => {
-				console.log(product);
-
 				return {
 					payload: {
 						id: product.id,
 						quantity: quantity,
+						title: product.title,
+						price: product.price,
 					},
 				};
 			},
 			reducer: (state, action) => {
-				console.log(action.payload);
+				const product = action.payload;
+
+				const productId = product.id;
+
+				const productIndex = state.findIndex((item) => item.id === productId);
+
 				// add new record to state
+				if (productIndex === -1) {
+					state.push(product);
+				} else {
+					state[productIndex]["quantity"] += product.quantity;
+				}
+
+				return state;
 			},
 		},
 		removeProduct: (state, action) => {

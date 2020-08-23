@@ -15,7 +15,7 @@ const ProductItem = (product) => {
 			<div>
 				<div>{product.title}</div>
 				<div>{product.price} €</div>
-				<div>Quantity: {product.inventory}</div>
+				<div>Quantity: {product.quantity}</div>
 				<span
 					style={{ visibility: product.inventory === 0 ? "visible" : "hidden" }}
 				>
