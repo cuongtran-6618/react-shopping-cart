@@ -4,8 +4,21 @@ const cartSlice = createSlice({
 	name: "cart",
 	initialState: [],
 	reducers: {
-		updateProduct: (state, action) => {
-			console.log("updateProduct was triggered", state, action);
+		updateProduct: {
+			prepare: (product, quantity) => {
+				console.log(product);
+
+				return {
+					payload: {
+						id: product.id,
+						quantity: quantity,
+					},
+				};
+			},
+			reducer: (state, action) => {
+				console.log(action.payload);
+				// add new record to state
+			},
 		},
 		removeProduct: (state, action) => {
 			console.log("removeProduct was triggered", state, action);
