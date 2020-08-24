@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateProduct, removeProduct } from "../cart/cartSlice";
+import { updateProductInventory } from "./productsSlice";
 
 const Product = (product) => {
 	const dispatch = useDispatch();
 
 	const handleAddToCart = () => {
-		console.log("click add to cart button");
 		dispatch(updateProduct(product, 1));
+		dispatch(updateProductInventory({ id: product.id, quantity: -1 }));
 	};
 
 	return (
