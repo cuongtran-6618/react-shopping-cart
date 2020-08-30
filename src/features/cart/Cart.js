@@ -1,27 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import ProductItem from "./ProductItem";
+import CartItem from "./CartItem";
 
 export const Cart = () => {
-	const products = useSelector((state) => state.cart);
-	const [message, setMessage] = useState("There isn't any item in cart");
+	const defaultCartMessage = "There isn't any item in cart";
+
+	const cartItems = useSelector((state) => state.cart);
+
+	const productCollection = useSelector((state) => {
+		return state.products;
+	});
+	const [message, setMessage] = useState(defaultCartMessage);
+
+	const fetchProduct = (item) => {
+		const productFromStore = productCollection.filter(
+			(product) => product.id === item.id
+		);
+
+		if (productFromStore) {
+			return (
+				<li>
+					<CartItem
+						key={productFromStore.id}
+						item={productFromStore[0]}
+						quantity={item.quantity}
+					/>
+				</li>
+			);
+		}
+	};
 
 	const nodes =
-		products.length > 0
-			? products.map((product) => <ProductItem key={product.id} {...product} />)
+		cartItems.length > 0
+			? cartItems.map((product) => fetchProduct(product))
 			: null;
 
 	useEffect(() => {
-		console.log("render");
-		getMessage(products);
+		getMessage(cartItems);
 	});
 
 	const getMessage = (products) => {
 		if (products.length === 0) {
+			setMessage(defaultCartMessage);
 			return;
 		}
-
-		console.log(products);
 
 		const numberOfProduct = products.reduce(
 			(previous, current) => previous + current.quantity,
@@ -32,8 +54,6 @@ export const Cart = () => {
 			numberOfProduct > 1
 				? `There are ${numberOfProduct} product in cart`
 				: `There is 1 product in cart`;
-
-		console.log(numberOfProduct, text);
 
 		setMessage(text);
 	};

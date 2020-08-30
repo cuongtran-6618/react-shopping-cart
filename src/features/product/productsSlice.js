@@ -9,9 +9,11 @@ const productsSlice = createSlice({
 	reducers: {
 		updateProductInventory: (state, action) => {
 			const product = state.find((item) => item.id === action.payload.id);
+
 			if (product) {
 				product.inventory += action.payload.quantity;
 			}
+
 			return state;
 		},
 	},

@@ -1,34 +1,15 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { updateProduct, removeProduct } from "../cart/cartSlice";
-import { updateProductInventory } from "./productsSlice";
+import React from "react";
 
-const Product = (product) => {
-	const dispatch = useDispatch();
-
-	const handleAddToCart = () => {
-		dispatch(updateProduct(product, 1));
-		dispatch(updateProductInventory({ id: product.id, quantity: -1 }));
-	};
-
+const Product = ({ title, price, quantity }) => {
 	return (
-		<li>
-			<div>
-				<div>{product.title}</div>
-				<div>{product.price} €</div>
-				<div>Quantity: {product.inventory}</div>
-				<span
-					style={{ visibility: product.inventory === 0 ? "visible" : "hidden" }}
-				>
-					Out of stock
-				</span>
-			</div>
-			<div>
-				<button disabled={product.inventory === 0} onClick={handleAddToCart}>
-					{product.inventory === 0 ? "Out of stock" : "Add to cart"}
-				</button>
-			</div>
-		</li>
+		<div>
+			<div>{title}</div>
+			<div>{price} €</div>
+			<div>{quantity} pc</div>
+			<span style={{ visibility: quantity === 0 ? "visible" : "hidden" }}>
+				Out of stock
+			</span>
+		</div>
 	);
 };
 
