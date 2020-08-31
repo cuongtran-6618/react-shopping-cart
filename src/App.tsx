@@ -1,6 +1,7 @@
 import React from "react";
 import ProductList from "./features/product/ProductList";
 import Cart from "./features/cart/Cart";
+import "./assets/style/main.css";
 
 function App() {
 	return (
