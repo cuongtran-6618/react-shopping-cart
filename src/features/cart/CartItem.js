@@ -30,19 +30,54 @@ const CartItem = ({ item, quantity }) => {
 		updateStore(item, -1, 1);
 	};
 
-	return (
-		<div>
-			<Product title={item.title} price={item.price} quantity={quantity} />
-			<button disabled={quantity <= 1} onClick={handleDecreaseItem}>
-				-
-			</button>
-			<span>{quantity}</span>
-			<button disabled={item.inventory === 0} onClick={handleIncreaseItem}>
-				+
-			</button>
+	const subtotal = () => {
+		const subtotal = item.price * quantity;
+		let subtotalText = subtotal.toString().split(".");
+		const fractional = subtotalText[1];
 
-			<button onClick={handleRemoveCartItem}>Remove</button>
-		</div>
+		return fractional && fractional.length > 2
+			? subtotalText[0].concat(".", fractional.substring(0, 2))
+			: subtotal;
+	};
+
+	return (
+		<tr>
+			<td className="w-full sm:w-auto block sm:table-cell py-4">
+				<Product title={item.title} price={null} quantity={null} />
+			</td>
+			<td className="hidden sm:table-cell text-center m-2">{item.price}</td>
+			<td className="w-2/5 sm:w-auto text-center inline-block sm:table-cell p-2">
+				<div className="flex justify-center">
+					<button
+						className={`bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow ${
+							quantity <= 1 ? "cursor-not-allowed opacity-50" : ""
+						}`}
+						disabled={quantity <= 1}
+						onClick={handleDecreaseItem}
+					>
+						-
+					</button>
+
+					<div className="p-1 m-1 w-8">{quantity}</div>
+
+					<button
+						className={`bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow ${
+							item.inventory === 0 ? "cursor-not-allowed opacity-50" : ""
+						}`}
+						disabled={item.inventory === 0}
+						onClick={handleIncreaseItem}
+					>
+						+
+					</button>
+				</div>
+			</td>
+			<td className="w-2/5 sm:w-auto text-center inline-block sm:table-cell p-2">
+				{subtotal()} €
+			</td>
+			<td className="w-1/5 sm:w-auto text-center inline-block sm:table-cell p-2">
+				<button onClick={handleRemoveCartItem}>Remove</button>
+			</td>
+		</tr>
 	);
 };
 

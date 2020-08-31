@@ -19,13 +19,11 @@ export const Cart = () => {
 
 		if (productFromStore) {
 			return (
-				<li>
-					<CartItem
-						key={productFromStore.id}
-						item={productFromStore[0]}
-						quantity={item.quantity}
-					/>
-				</li>
+				<CartItem
+					key={productFromStore.id}
+					item={productFromStore[0]}
+					quantity={item.quantity}
+				/>
 			);
 		}
 	};
@@ -34,6 +32,29 @@ export const Cart = () => {
 		cartItems.length > 0
 			? cartItems.map((product) => fetchProduct(product))
 			: null;
+
+	const table = () => {
+		const hasItem = cartItems.length > 0;
+
+		if (!hasItem) {
+			return null;
+		}
+
+		return (
+			<table className="w-full lg:w-3/6 my-2">
+				<thead className="hidden md:table-header-group">
+					<tr>
+						<th className="text-left">Item</th>
+						<th>Price</th>
+						<th>Amount</th>
+						<th>Subtotal</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>{nodes}</tbody>
+			</table>
+		);
+	};
 
 	useEffect(() => {
 		getMessage(cartItems);
@@ -59,10 +80,12 @@ export const Cart = () => {
 	};
 
 	return (
-		<div>
-			<h2>Shopping cart</h2>
-			<h3>{message}</h3>
-			<ul>{nodes}</ul>
+		<div className="px-2 m-2">
+			<h2 className="border-top py-2 font-bold">Shopping cart</h2>
+			<div className="italic text-xs py-1">
+				<span>{message}</span>
+			</div>
+			{table()}
 		</div>
 	);
 };

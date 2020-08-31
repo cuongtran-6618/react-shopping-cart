@@ -21,7 +21,9 @@
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"build:css": "postcss src/assets/style/tailwind.css -o src/assets/style/main.css",
+		"watch:css": "postcss src/assets/style/tailwind.css -o src/assets/style/main.css"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -40,6 +42,9 @@
 	},
 	"devDependencies": {
 		"@types/react-redux": "^7.1.9",
-		"redux-devtools": "^3.6.1"
+		"autoprefixer": "^9.8.6",
+		"postcss-cli": "^7.1.1",
+		"redux-devtools": "^3.6.1",
+		"tailwindcss": "^1.7.6"
 	}
 }
