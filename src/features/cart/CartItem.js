@@ -42,11 +42,13 @@ const CartItem = ({ item, quantity }) => {
 
 	return (
 		<tr>
-			<td className="w-full sm:w-auto block sm:table-cell py-4">
+			<td className="w-full sm:w-1/3 block sm:table-cell py-4">
 				<Product title={item.title} price={null} quantity={null} />
 			</td>
-			<td className="hidden sm:table-cell text-center m-2">{item.price}</td>
-			<td className="w-2/5 sm:w-auto text-center inline-block sm:table-cell p-2">
+			<td className="hidden sm:w-1/6 sm:table-cell text-center m-2">
+				{item.price}
+			</td>
+			<td className="w-2/5 sm:w-1/6 text-center inline-block sm:table-cell p-2">
 				<div className="flex justify-center">
 					<button
 						className={`bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow ${
@@ -71,10 +73,10 @@ const CartItem = ({ item, quantity }) => {
 					</button>
 				</div>
 			</td>
-			<td className="w-2/5 sm:w-auto text-center inline-block sm:table-cell p-2">
+			<td className="w-2/5 sm:w-1/6 text-center inline-block sm:table-cell p-2">
 				{subtotal()} €
 			</td>
-			<td className="w-1/5 sm:w-auto text-center inline-block sm:table-cell p-2">
+			<td className="w-1/5 sm:w-1/6 text-center inline-block sm:table-cell p-2">
 				<button onClick={handleRemoveCartItem}>Remove</button>
 			</td>
 		</tr>
