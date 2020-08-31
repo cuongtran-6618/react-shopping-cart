@@ -12,7 +12,13 @@ const BuyButton = (product) => {
 	};
 
 	return (
-		<button disabled={product.inventory === 0} onClick={handleAddToCart}>
+		<button
+			className={`bg-white hover:bg-blue-600 hover:text-white text-gray-800 font-semibold py-2 px-6 my-2 border border-gray-400 rounded shadow ${
+				product.inventory === 0 ? "cursor-not-allowed opacity-50" : ""
+			}`}
+			disabled={product.inventory === 0}
+			onClick={handleAddToCart}
+		>
 			Buy
 		</button>
 	);

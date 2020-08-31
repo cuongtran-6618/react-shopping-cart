@@ -3,10 +3,15 @@ import React from "react";
 const Product = ({ title, price, quantity }) => {
 	return (
 		<div>
-			<div>{title}</div>
-			<div>{price} €</div>
-			<div>{quantity} pc</div>
-			<span style={{ visibility: quantity === 0 ? "visible" : "hidden" }}>
+			<strong className="text-sm">{title}</strong>
+			{price ? <div> {price} € </div> : null}
+			{price ? <div>{quantity} pc</div> : null}
+
+			<span
+				className={`text-red-600 italic text-xs ${
+					quantity === 0 ? "visible" : "invisible"
+				}`}
+			>
 				Out of stock
 			</span>
 		</div>
